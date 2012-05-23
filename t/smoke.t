@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 26;
+use Test::More tests => 27;
 use_ok('Data::Dumper');
 use_ok('AnyEvent::IRC::Connection');
 use_ok('AnyEvent::IRC::Client');
@@ -84,3 +84,6 @@ ok($res eq "what","Proc Persistentence after failure");
 
 # missing tests:
 # * is context set?
+my $res = $tcl->safe_eval(make_command('return $context::channel'));
+warn $res;
+ok($res eq '#channel',"Context::channel");
