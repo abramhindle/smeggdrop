@@ -34,7 +34,9 @@ proc get_safe_interp {args} {
         interp bgerror $our_last_safe_interp safe_interp_bgerror
 
         # set interp resource limits
-        #interp limit $_interp command -value 1000  # max number of commands that can be executed
+        # limits tonnes of calls
+        interp limit $our_last_safe_interp command -value 100000  
+        # max number of commands that can be executed
         #...
 
 	# export some procs to slave
@@ -56,6 +58,7 @@ proc safe_interp_eval {command} {
     set _interp [get_safe_interp]
     set safe_interp_is_safe 0
     #interp limit $_interp command -value 1000  # this would be nice, but it's not per-eval
+    interp limit $_interp time -seconds [clock seconds] -milliseconds 5000
     set _result [interp eval $_interp $command]
     set safe_interp_is_safe 1
     return $_result

@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 27;
+use Test::More tests => 28;
 use_ok('Data::Dumper');
 use_ok('AnyEvent::IRC::Connection');
 use_ok('AnyEvent::IRC::Client');
@@ -70,6 +70,15 @@ ok(!$tcl->safe_eval($command),"String repeat too much");
 $command = make_command(". what");
 ok($tcl->safe_eval($command) eq "what","Proc Persistentence after failure");
 
+
+#this test ensures we have clock access
+# this is ensure our interpreter is init'd
+$command = make_command("clock seconds");
+my $res = $tcl->safe_eval($command);
+warn "$res";
+ok( $res > (time() - 30),"Clock works!");
+
+
 #this test makes sure that we don't lose our old procs
 $command = make_command("proc toolong {} { set x 0; while {1} { incr x } }");
 ok(!$tcl->safe_eval($command),"Set proc");
@@ -80,10 +89,10 @@ ok($v =~ /Error/,"proc runs too long");
 $command = make_command(". what");
 my $res = $tcl->safe_eval($command);
 #warn $res;
-ok($res eq "what","Proc Persistentence after failure");
+ok($res eq "what","Proc Persistentence after failure [toolong]");
 
 # missing tests:
 # * is context set?
-my $res = $tcl->safe_eval(make_command('return $context::channel'));
+my $res = $tcl->safe_eval(make_command('channel'));
 warn $res;
-ok($res eq '#channel',"Context::channel");
+ok($res eq '#channel',"channel");

@@ -69,6 +69,7 @@ sub _build_interp {
 
     # init the actual interpreter
     my $interp = Tcl->new;
+    $interp->Init();
 
     # load core tcl procs
     # get path to lib/

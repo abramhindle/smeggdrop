@@ -81,7 +81,14 @@ sub load_index {
 
     my $index_fh;
     my $lines;
-    open($index_fh, "$state_path/$type/_index") or die $!;
+    my $index_dir = "$state_path/$type";
+    my $index_path = "${index_dir}/_index";
+    if (! -e $index_path && -e $state_path ) {
+        mkdir $index_dir;
+        open($index_fh, ">", $index_path) or die $!;
+        close($index_fh);
+    }
+    open($index_fh, $index_path) or die $!;
     {
 	local $/;
 	$lines = <$index_fh>
