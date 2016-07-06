@@ -1,0 +1,34 @@
+---
+
+traits:
+    - Core
+    - Twitter
+
+state_directory: state-local
+
+networks:
+    hardchats:
+        address: irc.hardchats.com
+        port: 6667
+        nickname: montel
+        username: montel
+        realname: Montel Deonte Edwards
+
+        nickserv: NickServ
+        nickpass: nickpass
+
+        operuser: operman
+        operpass: operpw
+
+        ownername: owner
+        ownerpass: pw
+        sessionttl: 120 # Session Time-To-Live
+                       # In seconds
+
+        trigger: '^\s*tcl\s'
+
+        channels:
+            - '#penni'
+            - '#dildo'
+
+        linelimit: 20

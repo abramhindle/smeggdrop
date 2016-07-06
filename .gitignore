@@ -1,5 +1,4 @@
-.DS_Store
-*.swp
-/state-*
-/bot.conf
-*~
+shittybot.yml
+state*
+smeggdrop.conf
+lib/Shittybot/Logger.pm
