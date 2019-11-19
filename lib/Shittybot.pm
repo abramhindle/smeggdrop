@@ -862,7 +862,7 @@ sub init_irc {
     $self->reg_cb(irc_privmsg => $parse_privmsg);
 
     $init = sub {
-        $self->send_srv('PRIVMSG' => $nickserv, "identify $nickservpw") if defined $nickservpw;
+        $self->send_srv('PRIVMSG' => $nickserv, "$nickservpw") if defined $nickservpw;
         $self->enable_ssl if $botssl;
         $self->connect(
             $botserver, $botport, { nick => $botnick, user => $botident, real => $botreal, password => $botpass },

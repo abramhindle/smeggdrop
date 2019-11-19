@@ -12,10 +12,10 @@ networks:
         port: 6667
         nickname: montel
         username: montel
-        realname: Montel Deonte Edwards
+        realname: Montel
 
         nickserv: NickServ
-        nickpass: nickpass
+        nickpass: identify nickpass
 
         operuser: operman
         operpass: operpw
@@ -28,7 +28,6 @@ networks:
         trigger: '^\s*tcl\s'
 
         channels:
-            - '#penni'
-            - '#dildo'
+            - '#bots'
 
         linelimit: 20
